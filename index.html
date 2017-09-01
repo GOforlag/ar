@@ -23,8 +23,37 @@
 		</a-marker>
 
 		<a-marker preset='kanji'>
-			<a-sphere position='0 0 0' color="#eec42d" radius='4'>
-			</a-sphere>
+			<a-entity>
+				<a-entity>
+				<a-sphere position='-.03 .5 0' color="#ee2d2d" radius='.05'></a-sphere>
+				<a-sphere position='.03 .5 0' color="#2d75ee" radius='.05'></a-sphere>
+				<a-sphere position='0 .5 .03' color="#ee2d2d" radius='.05'></a-sphere>
+				<a-sphere position='0 .5 -.03' color="#2d75ee" radius='.05'></a-sphere>
+				<a-sphere position='0 .53 0' color="#2d75ee" radius='.05'></a-sphere>
+				<a-sphere position='0 .47 0' color="#ee2d2d" radius='.05'></a-sphere>
+			<a-animation attribute="rotation" dur="3000" fill="none" easing="linear" to="0 360 0" repeat="indefinite"></a-animation>
+		</a-entity>
+
+				<a-entity>
+					<a-sphere position='.25 .5 0' color="#eec42d" radius='.03'>
+					</a-sphere>
+					<a-sphere position='-.25 .5 0' color="#eec42d" radius='.03'>
+					</a-sphere>
+					<a-animation attribute="rotation" dur="1000" fill="none" easing="linear" to="0 360 0" repeat="indefinite"></a-animation>
+				</a-entity>
+				<a-entity>
+					<a-sphere position='.5 .5 0' color="#eec42d" radius='.03'>
+					</a-sphere>
+					<a-sphere position='-.5 .5 0' color="#eec42d" radius='.03'>
+					</a-sphere>
+					<a-sphere position='0 .5 .5' color="#eec42d" radius='.03'>
+					</a-sphere>
+					<a-sphere position='0 .5 -.5' color="#eec42d" radius='.03'>
+					</a-sphere>
+					<a-animation attribute="rotation" dur="2000" fill="none" easing="linear" to="0 360 0" repeat="indefinite"></a-animation>
+				</a-entity>
+
+			</a-entity>
 		</a-marker>
 		<a-entity camera></a-entity>
 	</a-scene>
