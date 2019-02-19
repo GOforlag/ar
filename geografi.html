@@ -2,20 +2,21 @@
 <html>
 
 <head>
+	<title>Xplore Geografi AR</title>
 	<script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
 	<script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.2/aframe/build/aframe-ar.js"></script>
 </head>
 
 <body style='margin : 0px; overflow: hidden;'>
 	<a-scene id="btn" embedded arjs='trackingMethod: best; debugUIEnabled: false;' vr-mode-ui="enabled: false">
-		<a-marker preset='hiro'>
+		<a-marker-camera preset='custom' type="pattern" url="/pattern-marker.patt" >
 			<a-entity animation="property: rotation; dur: 200000; to:0 360 0; loop: true; easing:linear">
 				<a-sphere src='images/moon_1024.jpg' animation="property: rotation; dur: 100000; to:0 360 0; loop: true; easing:linear" position='2 .8 0' radius='.2'>
 				</a-sphere>
 				<a-sphere id="world" src='images/world-topo.jpg' position='0 .8 0' radius='.8' animation="property: rotation; dur: 100000; to:0 360 0; loop: true; easing:linear">
 				</a-sphere>
 			</a-entity>
-		</a-marker>
+		</a-marker-camera>
 		<a-entity camera></a-entity>
 	</a-scene>
 	<script>
