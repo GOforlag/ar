@@ -1,0 +1,81 @@
+<!doctype HTML>
+<html>
+
+<head>
+	<title>Xplore Fysik/Kemi AR</title>
+	<script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
+	<script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.2/aframe/build/aframe-ar.js"></script>
+</head>
+
+<body style='margin : 0px; overflow: hidden;'>
+	<a-scene id="btn" embedded arjs='trackingMethod: best; debugUIEnabled: false;' vr-mode-ui="enabled: false">
+		<a-marker-camera preset='custom' type="pattern" url="pattern-marker.patt" >
+				<a-entity>
+						<a-entity>
+							<a-sphere position='-.03 .5 0' color="#ee2d2d" radius='.05'></a-sphere>
+							<a-sphere position='.03 .5 0' color="#ee2d2d" radius='.05'></a-sphere>
+							<a-sphere position='0 .5 .03' color="#ee2d2d" radius='.05'></a-sphere>
+							<a-sphere position='0 .5 -.03' color="#ee2d2d" radius='.05'></a-sphere>
+							<a-sphere position='0 .53 0' color="#ee2d2d" radius='.05'></a-sphere>
+							<a-sphere position='0 .47 0' color="#ee2d2d" radius='.05'></a-sphere>
+							<a-animation id="nucleus" attribute="rotation" dur="3000" fill="red" easing="linear" to="0 360 0" repeat="indefinite"></a-animation>
+						</a-entity>
+						<a-entity>
+							<a-sphere position='.25 .5 0' color="#eec42d" radius='.03'>
+							</a-sphere>
+							<a-sphere position='-.25 .5 0' color="#eec42d" radius='.03'>
+							</a-sphere>
+							<a-animation id="shellOne" attribute="rotation" dur="1000" fill="none" easing="linear" to="0 360 0" repeat="indefinite"></a-animation>
+						</a-entity>
+						<a-entity>
+							<a-sphere position='.5 .5 0' color="#eec42d" radius='.03'>
+							</a-sphere>
+							<a-sphere position='-.5 .5 0' color="#eec42d" radius='.03'>
+							</a-sphere>
+							<a-sphere position='0 .5 .5' color="#eec42d" radius='.03'>
+							</a-sphere>
+							<a-sphere position='0 .5 -.5' color="#eec42d" radius='.03'>
+							</a-sphere>
+							<a-animation id="shellTwo" attribute="rotation" dur="2000" fill="none" easing="linear" to="0 360 0" repeat="indefinite"></a-animation>
+						</a-entity>
+					</a-entity>
+		</a-marker-camera>
+		<a-entity camera></a-entity>
+	</a-scene>
+	<script>
+		function toggle() {
+			var world = document.getElementById('world');
+			var currentWorld = world.getAttribute("src");
+			if (currentWorld == 'images/world-topo.jpg') {
+				world.setAttribute('src', 'images/world-night0.jpg');
+			} else {
+				world.setAttribute('src', 'images/world-topo.jpg');
+			}
+			var nucleus = document.getElementById('nucleus');
+			var shellOne = document.getElementById('shellOne');
+			var shellTwo = document.getElementById('shellTwo');
+			if (nucleus.getAttribute("dur") == 3000) {
+				nucleus.setAttribute('dur', 500);
+			} else {
+				nucleus.setAttribute('dur', 3000);
+			}
+
+			if (shellOne.getAttribute("dur") == 1000) {
+				shellOne.setAttribute('dur', 1000 / 6);
+			} else {
+				shellOne.setAttribute('dur', 1000);
+			}
+
+			if (shellTwo.getAttribute("dur") == 2000) {
+				shellTwo.setAttribute('dur', 2000 / 6);
+			} else {
+				shellTwo.setAttribute('dur', 2000);
+			}
+		}
+		var btn = document.getElementById('btn');
+		btn.addEventListener("click", toggle, false);
+	</script>
+
+</body>
+
+</html>
