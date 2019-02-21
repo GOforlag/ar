@@ -5,76 +5,177 @@
 	<title>Xplore Fysik/Kemi AR</title>
 	<script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
 	<script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.2/aframe/build/aframe-ar.js"></script>
+	<script src="elements.js"></script>
+
+	<link href="style.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body style='margin : 0px; overflow: hidden;'>
-	<a-scene id="btn" embedded arjs='trackingMethod: best; debugUIEnabled: false;' vr-mode-ui="enabled: false">
-		<a-marker-camera preset='custom' type="pattern" url="pattern-marker.patt" >
-				<a-entity>
-						<a-entity>
-							<a-sphere position='-.03 .5 0' color="#ee2d2d" radius='.05'></a-sphere>
-							<a-sphere position='.03 .5 0' color="#ee2d2d" radius='.05'></a-sphere>
-							<a-sphere position='0 .5 .03' color="#ee2d2d" radius='.05'></a-sphere>
-							<a-sphere position='0 .5 -.03' color="#ee2d2d" radius='.05'></a-sphere>
-							<a-sphere position='0 .53 0' color="#ee2d2d" radius='.05'></a-sphere>
-							<a-sphere position='0 .47 0' color="#ee2d2d" radius='.05'></a-sphere>
-							<a-animation id="nucleus" attribute="rotation" dur="3000" fill="red" easing="linear" to="0 360 0" repeat="indefinite"></a-animation>
-						</a-entity>
-						<a-entity>
-							<a-sphere position='.25 .5 0' color="#eec42d" radius='.03'>
-							</a-sphere>
-							<a-sphere position='-.25 .5 0' color="#eec42d" radius='.03'>
-							</a-sphere>
-							<a-animation id="shellOne" attribute="rotation" dur="1000" fill="none" easing="linear" to="0 360 0" repeat="indefinite"></a-animation>
-						</a-entity>
-						<a-entity>
-							<a-sphere position='.5 .5 0' color="#eec42d" radius='.03'>
-							</a-sphere>
-							<a-sphere position='-.5 .5 0' color="#eec42d" radius='.03'>
-							</a-sphere>
-							<a-sphere position='0 .5 .5' color="#eec42d" radius='.03'>
-							</a-sphere>
-							<a-sphere position='0 .5 -.5' color="#eec42d" radius='.03'>
-							</a-sphere>
-							<a-animation id="shellTwo" attribute="rotation" dur="2000" fill="none" easing="linear" to="0 360 0" repeat="indefinite"></a-animation>
-						</a-entity>
-					</a-entity>
+	<a-scene embedded arjs='trackingMethod: best; debugUIEnabled: false;' vr-mode-ui="enabled: false">
+		<a-marker-camera preset='custom' type="pattern" url="pattern-marker.patt">
+			<a-entity id="atom" position=".25 1.25 -1.5" rotation="-45 45 0">
+				<a-entity id="nucleus" animation="property: rotation; dur: 1000; to:0 360 0; loop: true; easing:linear">
+				</a-entity>
+
+				<a-entity id="shells" animation="property: rotation; dur: 10000; to:0 0 360; loop: true; easing:linear">
+				</a-entity>
+
+			</a-entity>
 		</a-marker-camera>
 		<a-entity camera></a-entity>
 	</a-scene>
+
+	<div class="header">
+		<h1>
+			<span id="atomNo"></span>
+			<span id="symbol"></span>
+		</h1>
+		<h2>
+			<span id="name"></span>
+		</h2>
+	</div>
+	<div class="btns">
+		<button class="btn" id="prev">Forrige</button>
+		<button class="btn" id="next">Næste</button>
+	</div>
 	<script>
-		function toggle() {
-			var world = document.getElementById('world');
-			var currentWorld = world.getAttribute("src");
-			if (currentWorld == 'images/world-topo.jpg') {
-				world.setAttribute('src', 'images/world-night0.jpg');
-			} else {
-				world.setAttribute('src', 'images/world-topo.jpg');
-			}
-			var nucleus = document.getElementById('nucleus');
-			var shellOne = document.getElementById('shellOne');
-			var shellTwo = document.getElementById('shellTwo');
-			if (nucleus.getAttribute("dur") == 3000) {
-				nucleus.setAttribute('dur', 500);
-			} else {
-				nucleus.setAttribute('dur', 3000);
-			}
+		var sceneEl = document.querySelector('a-scene');
+		var atomEl = document.querySelector('#atom');
+		var atomNoEl = document.querySelector('#atomNo');
+		var nameEl = document.querySelector('#name');
+		var symbolEl = document.querySelector('#symbol');
+		var nucleusEl = document.querySelector('#nucleus');
+		var shellsEl = document.querySelector('#shells');
+		var atomNo = 1;
 
-			if (shellOne.getAttribute("dur") == 1000) {
-				shellOne.setAttribute('dur', 1000 / 6);
-			} else {
-				shellOne.setAttribute('dur', 1000);
-			}
+		function getRandomPosition(number) {
+			const radius = atomNo / 3 + 20
 
-			if (shellTwo.getAttribute("dur") == 2000) {
-				shellTwo.setAttribute('dur', 2000 / 6);
-			} else {
-				shellTwo.setAttribute('dur', 2000);
+			var posX, posY, posZ;
+			posX = Math.floor(Math.random() * (radius * 2) - (radius));
+			posY = Math.floor(Math.random() * (radius * 2) - (radius));
+			posZ = Math.floor(Math.random() * (radius * 2) - (radius));
+			/*
+			  do {
+				posX = Math.floor(Math.random() * (radius * 2) - (radius * 2));
+				posY = Math.floor(Math.random() * (radius * 2) - (radius * 2));
+				posZ = Math.floor(Math.random() * (radius * 2) - (radius * 2));
+			  } while ( 
+				(Math.sqrt(Math.pow(radius - posX, 2) + Math.pow(radius - posY, 2)) > radius) &&
+				(Math.sqrt(Math.pow(radius - posX, 2) + Math.pow(radius - posZ, 2)) > radius) &&
+				(Math.sqrt(Math.pow(radius - posZ, 2) + Math.pow(radius - posY, 2)) > radius)
+			  )
+			  */
+
+			return {
+				x: posX / 1000,
+				y: posY / 1000,
+				z: posZ / 1000
 			}
 		}
-		var btn = document.getElementById('btn');
-		btn.addEventListener("click", toggle, false);
+
+		function renderAtom() {
+			var element = elements[atomNo - 1]
+			var shells = shellsEl.querySelectorAll('.shell');
+			var protons = nucleusEl.querySelectorAll('a-sphere');
+			shells.forEach(el => {
+				shellsEl.removeChild(el);
+			})
+			protons.forEach(el => {
+				nucleusEl.removeChild(el);
+			})
+			atomNoEl.innerText = atomNo
+			symbolEl.innerText = element.symbol
+			nameEl.innerText = element.name
+			console.log(element);
+
+			for (let i = 0; i < atomNo; i++) {
+				var protonEl = document.createElement('a-sphere');
+				protonEl.setAttribute('geometry', {
+					primitive: 'sphere',
+					radius: .03
+				});
+				protonEl.setAttribute('color', "#ee2d2d");
+				var position = getRandomPosition(atomNo)
+
+				protonEl.setAttribute('position', {
+					x: position.x,
+					y: position.y,
+					z: position.z
+				});
+				nucleusEl.appendChild(protonEl);
+			}
+			var ringRadius = .25
+			var shellEl = document.createElement('a-entity');
+			shellEl.className = "shell";
+			var shells
+			if (atomNo > 1) {
+				shells = [2].concat(element.shells)
+			} else {
+				shells = element.shells
+			}
+
+			shells.forEach(electronCount => {
+				var ringEl = document.createElement('a-ring');
+				ringEl.setAttribute('geometry', {
+					primitive: 'ring'
+				});
+				ringEl.setAttribute('radius-inner', ringRadius);
+				ringEl.setAttribute('radius-outer', ringRadius + .01);
+				ringEl.setAttribute('color', "#ddd");
+				shellEl.appendChild(ringEl);
+				var degree = 0
+				for (let i = 0; i < electronCount; i++) {
+
+					var electronEl = document.createElement('a-sphere');
+					electronEl.setAttribute('geometry', {
+						primitive: 'sphere',
+						radius: .03
+					});
+					electronEl.setAttribute('color', "#2d75ee");
+
+					var posX = ringRadius * Math.cos(degree * Math.PI / 180)
+					var posY = ringRadius * Math.sin(degree * Math.PI / 180)
+
+					electronEl.setAttribute('position', {
+						x: posX,
+						y: posY,
+						z: 0
+					});
+					shellEl.appendChild(electronEl);
+					degree = degree + 360 / electronCount
+				}
+				ringRadius = ringRadius + .25
+			})
+			shellsEl.appendChild(shellEl);
+		}
+
+		function prev() {
+			if (atomNo > 1) {
+				atomNo = atomNo - 1
+			} else {
+				atomNo = 118
+			}
+
+			renderAtom()
+		}
+
+		function next() {
+			if (atomNo < 118) {
+				atomNo = atomNo + 1
+			} else {
+				atomNo = 1
+			}
+
+			renderAtom()
+		}
+		var nextEl = document.getElementById('next');
+		nextEl.addEventListener("click", next, false);
+		var prevEl = document.getElementById('prev');
+		prevEl.addEventListener("click", prev, false);
+		renderAtom()
 	</script>
+
 
 </body>
 
