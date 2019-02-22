@@ -28,26 +28,6 @@
 			} else {
 				world.setAttribute('src', 'images/world-topo.jpg');
 			}
-			var nucleus = document.getElementById('nucleus');
-			var shellOne = document.getElementById('shellOne');
-			var shellTwo = document.getElementById('shellTwo');
-			if (nucleus.getAttribute("dur") == 3000) {
-				nucleus.setAttribute('dur', 500);
-			} else {
-				nucleus.setAttribute('dur', 3000);
-			}
-
-			if (shellOne.getAttribute("dur") == 1000) {
-				shellOne.setAttribute('dur', 1000 / 6);
-			} else {
-				shellOne.setAttribute('dur', 1000);
-			}
-
-			if (shellTwo.getAttribute("dur") == 2000) {
-				shellTwo.setAttribute('dur', 2000 / 6);
-			} else {
-				shellTwo.setAttribute('dur', 2000);
-			}
 		}
 		var btn = document.getElementById('btn');
 		btn.addEventListener("click", toggle, false);
