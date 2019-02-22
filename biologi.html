@@ -12,13 +12,77 @@
 <body style='margin : 0px; overflow: hidden;'>
 	<a-scene id="btn" embedded arjs='trackingMethod: best; debugUIEnabled: false;' vr-mode-ui="enabled: false">
 		<a-assets>
-			<a-asset-item id="shark" src="models/shark/scene.gltf"></a-asset-item>
+			<a-asset-item id="turtle0" src="models/model_47_-_loggerhead_sea_turtle_shelly/scene.gltf"></a-asset-item>
+			<a-asset-item id="turtle1" src="models/model_50_-_hatchling_hawksbill_sea_turtle/scene.gltf"></a-asset-item>
+			<a-asset-item id="turtle2" src="models/model_46_-_green_sea_turtle_with_shark_bite/scene.gltf"></a-asset-item>
 		</a-assets>
-		<a-marker-camera preset='custom' type="pattern" url="pattern-marker.patt" >
-			<a-entity gltf-model="#shark" animation-mixer scale="3 3 3"></a-entity>
+		<a-marker-camera preset='custom' type="pattern" url="pattern-marker.patt"> 
+			<a-entity id="container">
+
+			</a-entity>
+			
 		</a-marker-camera>
 		<a-entity camera></a-entity>
 	</a-scene>
+	<div class="btns">
+		<button class="btn" id="prev">Forrige</button>
+		<button class="btn" id="next">Næste</button>
+	</div>
+	<script>
+		var containerEl = document.querySelector('#container');
+		var index = 0
+		var turtles = [
+			{
+				id: 'turtle0',
+				name: '',
+				text: ''
+			},
+			{
+				id: 'turtle1',
+				name: '',
+				text: ''
+			},
+			{
+				id: 'turtle2',
+				name: '',
+				text: ''
+			}
+		]
+		function renderTurtle() {
+			
+			var oldTurtleEl = document.querySelector('#turtle');
+			if (oldTurtleEl) {
+				containerEl.removeChild(oldTurtleEl);
+			}
+			var turtleEl = document.createElement('a-entity');
+			turtleEl.id = "turtle";
+			console.log(index);
+			
+			var model = '#' + turtles[index].id
+			console.log(model);
+			
+			turtleEl.setAttribute('gltf-model', model);
+			turtleEl.setAttribute('animation-mixer', {clip: '*', loop: 'forever'});
+			turtleEl.setAttribute('scale', '3 3 3');
+			turtleEl.setAttribute('position', {x: 0, y: 2, z: 0});
+			containerEl.appendChild(turtleEl);
+			
+		}
+		function prev() {
+			index = index === 0 ? 2 : index-1
+			renderTurtle()
+		}
+
+		function next() {
+			index = index === 2 ? 0 : index+1
+			renderTurtle()
+		}
+		var nextEl = document.getElementById('next');
+		nextEl.addEventListener("click", next, false);
+		var prevEl = document.getElementById('prev');
+		prevEl.addEventListener("click", prev, false);
+		renderTurtle()
+	</script>
 </body>
 
 </html>

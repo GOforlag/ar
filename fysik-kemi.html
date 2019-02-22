@@ -14,25 +14,17 @@
 	<a-scene embedded arjs='trackingMethod: best; debugUIEnabled: false;' vr-mode-ui="enabled: false">
 		<a-marker-camera preset='custom' type="pattern" url="pattern-marker.patt">
 			<a-entity id="atom" position="-.25 1 -.25" rotation="-45 45 0" scale="2 2 2">
-				<a-entity id="nucleus" animation="property: rotation; dur: 1000; to:0 360 0; loop: true; easing:linear">
-				</a-entity>
-
-				<a-entity id="shells" animation="property: rotation; dur: 10000; to:0 0 360; loop: true; easing:linear">
-				</a-entity>
-
+				<a-entity id="nucleus" animation="property: rotation; dur: 1000; to:0 360 0; loop: true; easing:linear"></a-entity>
+				<a-entity id="shells" animation="property: rotation; dur: 10000; to:0 0 360; loop: true; easing:linear"></a-entity>
 			</a-entity>
 		</a-marker-camera>
 		<a-entity camera></a-entity>
 	</a-scene>
 
-	<div class="header">
-		<h1>
-			<span id="atomNo"></span>
-			<span id="symbol"></span>
-		</h1>
-		<h2>
-			<span id="name"></span>
-		</h2>
+	<div class="element">
+		<div class="element__number" id="atomNo"></div>
+		<div class="element__symbol" id="symbol"></div>
+		<div class="element__name" id="name"></div>
 	</div>
 	<div class="btns">
 		<button class="btn" id="prev">Forrige</button>
