@@ -123,11 +123,6 @@ button {
 }
 
 @font-face {
-    font-family: "Swiss 721 W01_i2";
-    // src:url("/assets/fonts/d75c3426-6722-419e-97ba-b79455524453.eot?#iefix") format("eot")
-}
-
-@font-face {
     font-family: "Swiss 721 W01";
     src: url("/assets/fonts/d75c3426-6722-419e-97ba-b79455524453.eot?#iefix");
     src: url("/assets/fonts/d75c3426-6722-419e-97ba-b79455524453.eot?#iefix") format("eot"), url("/assets/fonts/601ca652-14f3-473e-8985-43447e32a0a9.woff2") format("woff2"), url("/assets/fonts/a6f1a854-9263-4e9c-9b8b-b4a5088262d9.woff") format("woff"), url("/assets/fonts/1a248e9c-07ff-4842-b342-01cfcc0c6cd6.ttf") format("truetype"), url("/assets/fonts/80d87eec-57cb-4899-a45b-8bc125bec359.svg#80d87eec-57cb-4899-a45b-8bc125bec359") format("svg");
