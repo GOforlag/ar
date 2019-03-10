@@ -2,56 +2,27 @@
 <html>
 
 <head>
-	<script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
-	<script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.2/aframe/build/aframe-ar.js"></script>
+	<title>Xplore.dk Augmented Reality</title>
+	<link href="style.css" rel="stylesheet" type="text/css" />
 </head>
 
-<body style='margin : 0px; overflow: hidden;'>
-	<a-scene id="btn" embedded arjs='trackingMethod: best; debugUIEnabled: false;' vr-mode-ui="enabled: false">
-		<a-marker preset='hiro'>
-			<a-entity animation="property: rotation; dur: 200000; to:0 360 0; loop: true; easing:linear">
-				<a-sphere src='images/moon_1024.jpg' animation="property: rotation; dur: 100000; to:0 360 0; loop: true; easing:linear" position='2 .8 0' radius='.2'>
-				</a-sphere>
-				<a-sphere id="world" src='images/world-topo.jpg' position='0 .8 0' radius='.8' animation="property: rotation; dur: 100000; to:0 360 0; loop: true; easing:linear">
-				</a-sphere>
-			</a-entity>
-		</a-marker>
-		<a-entity camera></a-entity>
-	</a-scene>
-	<script>
-		function toggle() {
-			var world = document.getElementById('world');
-			var currentWorld = world.getAttribute("src");
-			if (currentWorld == 'images/world-topo.jpg') {
-				world.setAttribute('src', 'images/world-night0.jpg');
-			} else {
-				world.setAttribute('src', 'images/world-topo.jpg');
-			}
-			var nucleus = document.getElementById('nucleus');
-			var shellOne = document.getElementById('shellOne');
-			var shellTwo = document.getElementById('shellTwo');
-			if (nucleus.getAttribute("dur") == 3000) {
-				nucleus.setAttribute('dur', 500);
-			} else {
-				nucleus.setAttribute('dur', 3000);
-			}
-
-			if (shellOne.getAttribute("dur") == 1000) {
-				shellOne.setAttribute('dur', 1000 / 6);
-			} else {
-				shellOne.setAttribute('dur', 1000);
-			}
-
-			if (shellTwo.getAttribute("dur") == 2000) {
-				shellTwo.setAttribute('dur', 2000 / 6);
-			} else {
-				shellTwo.setAttribute('dur', 2000);
-			}
-		}
-		var btn = document.getElementById('btn');
-		btn.addEventListener("click", toggle, false);
-	</script>
-
+<body>
+	<div class="front">
+		<div class="front__part">
+			<h1>Xplore</h1>
+			<div>Fuldt dækkende systemportaler til naturfagene og matematik.</div>
+			<a href="http://goforlag.dk" target="_blank">Bestil prøveabonnement på goforlag.dk</a>
+		</div>
+		<a class="front__part biologi" href="biologi.html">
+			Udforsk havskildpadder i 3D
+		</a>
+		<a class="front__part fysik-kemi" href="fysik-kemi.html">
+			Udforsk atomerne i 3D
+		</a>
+		<a class="front__part geografi" href="geografi.html">
+			Udforsk jordkloden i 3D
+		</a>
+	</div>
 </body>
 
 </html>

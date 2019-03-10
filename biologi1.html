@@ -2,13 +2,11 @@
 <html>
 
 <head>
-	<title>Xplore Geografi AR</title>
+	<title>Xplore Biologi AR</title>
 	<script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
 	<script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.2/aframe/build/aframe-ar.js"></script>
-	<link rel="prefetch" href="images/world-night0.jpg">
-	<link rel="prefetch" href="images/world-topo.jpg">
+	<script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v5.0.1/dist/aframe-extras.min.js"></script>
 	<link href="style.css" rel="stylesheet" type="text/css" />
-
 	<script>
 			var spinner = document.querySelector('#help');
 				AFRAME.registerComponent('registerevents', {
@@ -33,33 +31,24 @@
 
 <body style='margin : 0px; overflow: hidden;'>
 	<a-scene id="btn" embedded arjs='trackingMethod: best; debugUIEnabled: false;' vr-mode-ui="enabled: false">
-		<a-marker registerevents preset='custom' type="pattern" url="pattern-marker.patt" >
-			<a-entity animation="property: rotation; dur: 200000; to:0 360 0; loop: true; easing:linear">
-				<a-sphere src='images/moon_1024.jpg' animation="property: rotation; dur: 100000; to:0 360 0; loop: true; easing:linear" position='2 .8 0' radius='.2'>
-				</a-sphere>
-				<a-sphere id="world" src='images/world-topo.jpg' position='0 .8 0' radius='.8' animation="property: rotation; dur: 100000; to:0 360 0; loop: true; easing:linear">
-				</a-sphere>
+		<a-assets>
+			<a-asset-item id="turtle" src="models/model_50_-_hatchling_hawksbill_sea_turtle/scene.gltf"></a-asset-item>
+		</a-assets>
+		<a-marker registerevents preset='custom' type="pattern" url="pattern-marker.patt"> 
+			<a-entity id="container">
+				<a-entity gltf-model="#turtle" animation-mixer scale="3 3 3" position="0 2 0"></a-entity>
 			</a-entity>
+			
 		</a-marker>
 		<a-entity camera></a-entity>
 	</a-scene>
 	<div id="help">
 			Peg kameraet mod GO logoet og den sorte firkant
 		</div>
-	<script>
-		function toggle() {
-			var world = document.getElementById('world');
-			var currentWorld = world.getAttribute("src");
-			if (currentWorld == 'images/world-topo.jpg') {
-				world.setAttribute('src', 'images/world-night0.jpg');
-			} else {
-				world.setAttribute('src', 'images/world-topo.jpg');
-			}
-		}
-		var btn = document.getElementById('btn');
-		btn.addEventListener("click", toggle, false);
-	</script>
-
+	<div class="btns">
+		<a href="biologi.html" class="btn" id="prev">Forrige</a>
+		<a href="biologi2.html" class="btn" id="next">Næste</a>
+	</div>
 </body>
 
 </html>
